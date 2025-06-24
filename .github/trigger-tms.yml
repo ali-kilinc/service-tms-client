@@ -1,0 +1,36 @@
+name: trigger-tms
+
+# Only run on merges (pushes) to main _and_ when i18n files change
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/main/resources/**/*.po'
+      - 'src/**/*.po'
+      - 'src/**/i18n/**/*.json'
+
+jobs:
+  notify-tms:
+    runs-on: [ self-hosted, macOS ]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: List changed files
+        id: changes
+        run: |
+          echo "::set-output name=files::$(git diff --name-only HEAD^ HEAD)"
+      
+      - name: Notify TMS
+        if: ${{ steps.changes.outputs.files != '' }}
+        run: |
+          echo "Changed files: ${{ steps.changes.outputs.files }}"
+          curl -X POST http://localhost:8080/hooks/github \
+            -H "Content-Type: application/json" \
+            -d '{
+              "repo": "${{ github.repository }}",
+              "commit": "${{ github.sha }}",
+              "branch": "${{ github.ref_name }}",
+              "changed_files": ['"$(echo "${{ steps.changes.outputs.files }}" | sed "s/ /\",\"/g")"' ]
+            }'
