@@ -1,13 +1,10 @@
 name: trigger-tms
 
-# Only run on merges (pushes) to main _and_ when i18n files change
 on:
   push:
     branches: [ main ]
     paths:
-      - 'src/main/resources/**/*.po'
-      - 'src/**/*.po'
-      - 'src/**/i18n/**/*.json'
+      - 'locale/source/**/*.po'
 
 jobs:
   notify-tms:
@@ -15,22 +12,29 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 2
+          fetch-depth: 2  # need HEAD^ for the diff
 
-      - name: List changed files
+      - name: List changed .po files
         id: changes
         run: |
-          echo "::set-output name=files::$(git diff --name-only HEAD^ HEAD)"
-      
+          # get list of .po files changed in locale/source/
+          files=$(git diff --name-only HEAD^ HEAD \
+            | grep -E '^locale/source/.*\.po$' || true)
+          echo "::set-output name=files::$files"
+
       - name: Notify TMS
         if: ${{ steps.changes.outputs.files != '' }}
         run: |
-          echo "Changed files: ${{ steps.changes.outputs.files }}"
+          echo "PO files changed: ${{ steps.changes.outputs.files }}"
+          # Build a JSON array from the newline-separated list
+          json_files=$(printf '%s\n' ${{ steps.changes.outputs.files }} \
+            | awk '{printf "\"%s\",", $0}' \
+            | sed 's/,$//')
           curl -X POST http://localhost:8080/hooks/github \
             -H "Content-Type: application/json" \
             -d '{
               "repo": "${{ github.repository }}",
               "commit": "${{ github.sha }}",
               "branch": "${{ github.ref_name }}",
-              "changed_files": ['"$(echo "${{ steps.changes.outputs.files }}" | sed "s/ /\",\"/g")"' ]
+              "changed_files": ['"$json_files"']
             }'
