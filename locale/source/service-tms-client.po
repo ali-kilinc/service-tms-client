@@ -1,0 +1,24 @@
+# (C) 2021 Udemy
+#
+msgid ""
+msgstr ""
+"POT-Creation-Date: {Thu Jun 26 13:09:15 TRT 2025}\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: /Users/ali.kilinc/Code/service-tms-client/src/main/kotlin/com/example/hello/DemoApplication.kt:19
+#, java-format
+msgid "Welcome"
+msgstr "Welcome"
+
+
+#: /Users/ali.kilinc/Code/service-tms-client/src/main/kotlin/com/example/hello/DemoApplication.kt:20
+#, java-format
+msgid "Hello, World!"
+msgstr "Hello, World!"
+
+
+#: /Users/ali.kilinc/Code/service-tms-client/src/main/kotlin/com/example/hello/DemoApplication.kt:21
+#, java-format
+msgid "This is a sample demo application to test translations."
+msgstr "This is a sample demo application to test translations."
+

@@ -1,0 +1,55 @@
+plugins {
+	id 'org.jetbrains.kotlin.jvm' version '1.9.25'
+	id 'org.jetbrains.kotlin.plugin.spring' version '1.9.25'
+	id 'org.springframework.boot' version '3.5.3'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven {
+		url "https://pkg.udemy.dev/artifactory/maven"
+		credentials {
+			username = System.getenv("ART_USERNAME")
+			password = System.getenv("ART_API_KEY")
+		}
+	}
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
+	implementation 'org.jetbrains.kotlin:kotlin-reflect'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation(libs.udemy.l10n)
+}
+
+kotlin {
+	compilerOptions {
+		freeCompilerArgs.addAll '-Xjsr305=strict'
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+// Localization extraction
+tasks.register('gettext', JavaExec) {
+	group = "Execution"
+	description = "Extract gettext calls from source code"
+	classpath = sourceSets["main"].runtimeClasspath
+	mainClass = "com.udemy.libraries.l10n.extractor.ExtractorMain"
+	args = [rootProject.name, "src"]
+}
