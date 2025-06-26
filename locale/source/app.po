@@ -7,14 +7,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "Dashboard"
+msgid "welcome"
 msgstr ""
 
-msgid "Settings"
-msgstr ""
-
-msgid "Welcome to the app!!"
-msgstr ""
-
-msgid "This is a demo app for testing translations."
+msgid "goodbye"
 msgstr ""
