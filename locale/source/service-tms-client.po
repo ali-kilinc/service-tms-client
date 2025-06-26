@@ -2,7 +2,7 @@
 #
 msgid ""
 msgstr ""
-"POT-Creation-Date: {Thu Jun 26 13:09:15 TRT 2025}\n"
+"POT-Creation-Date: {Thu Jun 26 13:25:44 TRT 2025}\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: /Users/ali.kilinc/Code/service-tms-client/src/main/kotlin/com/example/hello/DemoApplication.kt:19
@@ -13,8 +13,8 @@ msgstr "Welcome"
 
 #: /Users/ali.kilinc/Code/service-tms-client/src/main/kotlin/com/example/hello/DemoApplication.kt:20
 #, java-format
-msgid "Hello, World!"
-msgstr "Hello, World!"
+msgid "Hello, World"
+msgstr "Hello, World"
 
 
 #: /Users/ali.kilinc/Code/service-tms-client/src/main/kotlin/com/example/hello/DemoApplication.kt:21
