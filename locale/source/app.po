@@ -10,3 +10,6 @@ msgstr ""
 
 msgid "goodbye"
 msgstr ""
+
+msgid "thanks"
+msgstr ""
