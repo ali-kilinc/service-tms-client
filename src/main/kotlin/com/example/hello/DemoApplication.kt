@@ -17,7 +17,7 @@ fun main(args: Array<String>) {
 class HelloController {
 	private val greetings = listOf(
 		gettext("Welcome"),
-		gettext("Hello, World!"),
+		gettext("Hello, World"),
 		gettext("This is a sample demo application to test translations.")
 	)
 
