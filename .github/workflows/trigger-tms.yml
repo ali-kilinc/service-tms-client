@@ -18,8 +18,7 @@ jobs:
         id: changes
         run: |
           # get list of .po files changed in locale/source/
-          files=$(git diff --name-only HEAD^ HEAD \
-            | grep -E '^locale/source/.*\.po$' || true)
+          files=$(git diff --name-only HEAD^ HEAD | grep -E '^locale/source/.*\.po$' | paste -sd, -)
           echo "::set-output name=files::$files"
 
       - name: Notify TMS
@@ -27,7 +26,8 @@ jobs:
         run: |
           echo "PO files changed: ${{ steps.changes.outputs.files }}"
           # Build a JSON array from the newline-separated list
-          json_files=$(printf '%s\n' ${{ steps.changes.outputs.files }} \
+          json_files=$(echo "${{ steps.changes.outputs.files }}" \
+            | tr ',' '\n' \
             | awk '{printf "\"%s\",", $0}' \
             | sed 's/,$//')
           curl -X POST http://localhost:8080/hooks/github \
