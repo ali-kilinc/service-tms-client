@@ -7,18 +7,18 @@ msgstr ""
 
 #: /Users/ali.kilinc/Code/service-tms-client/src/main/kotlin/com/example/hello/DemoApplication.kt:19
 #, java-format
-msgid "Welcome"
-msgstr "Welcome"
+msgid "Welcome-2"
+msgstr ""
 
 
 #: /Users/ali.kilinc/Code/service-tms-client/src/main/kotlin/com/example/hello/DemoApplication.kt:20
 #, java-format
-msgid "Hello, World"
-msgstr "Hello, World"
+msgid "Hello, World2"
+msgstr ""
 
 
 #: /Users/ali.kilinc/Code/service-tms-client/src/main/kotlin/com/example/hello/DemoApplication.kt:21
 #, java-format
-msgid "This is a sample demo application to test translations"
-msgstr "This is a sample demo application to test translations"
+msgid "This is a sample demo application to test translations.2"
+msgstr ""
 
